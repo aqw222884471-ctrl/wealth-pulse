@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WealthPulse - 財富脈動</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --primary: #10B981;
+      --negative: #EF4444;
+    }
+    body {
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
+    .card {
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+  </style>
+</head>
+<body class="text-white p-4 md:p-8">
+  <div class="max-w-3xl mx-auto">
+    <!-- Header -->
+    <div class="text-center py-6 animate-fade-in">
+      <h1 class="text-4xl font-bold text-emerald-400">💰 WealthPulse</h1>
+      <p class="text-gray-400 mt-2">財富脈動 · 財務儀表板</p>
+    </div>
+
+    <!-- Net Worth Card -->
+    <div class="card rounded-2xl p-8 mb-6 animate-fade-in" style="animation-delay: 0.1s">
+      <p class="text-gray-400 text-center mb-2">淨資產 Net Worth</p>
+      <h2 id="netWorth" class="text-5xl md:text-6xl font-bold text-center mb-4">$1,234,567</h2>
+      
+      <div id="changeContainer" class="flex justify-center">
+        <div class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gray-800">
+          <span id="changeIcon" class="text-2xl">📈</span>
+          <span id="changePercent" class="text-2xl font-bold text-emerald-400">+5.2%</span>
+          <span id="changeAmount" class="text-gray-400">
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <div class="card rounded-xl p-6 animate-fade-in" style="animation-delay: 0.2s">
+        <p class="text-gray-400 text-sm mb-1">本月收入</p>
+        <p id="totalIncome" class="text-2xl font-semibold text-emerald-400">$70,000</p>
+        <p class="text-xs text-gray-500 mt-2">薪水 + 股票 + 房租</p>
+      </div>
+
+      <div class="card rounded-xl p-6 animate-fade-in" style="animation-delay: 0.3s">
+        <p class="text-gray-400 text-sm mb-1">本月支出</p>
+        <p id="totalExpenses" class="text-2xl font-semibold text-red-400">$35,000</p>
+        <p class="text-xs text-gray-500 mt-2">來自 Notion</p>
+      </div>
+
+      <div class="card rounded-xl p-6 animate-fade-in" style="animation-delay: 0.4s">
+        <p class="text-gray-400 text-sm mb-1">本月結餘</p>
+        <p id="monthBalance" class="text-2xl font-semibold text-emerald-400">+$35,000</p>
+        <p class="text-xs text-gray-500 mt-2">收入 - 支出</p>
+      </div>
+    </div>
+
+    <!-- Stocks Section -->
+    <div class="card rounded-xl p-6 mb-6 animate-fade-in" style="animation-delay: 0.5s">
+      <h3 class="text-xl font-semibold mb-4">📈 股票資產</h3>
+      <div class="space-y-3">
+        <div class="flex justify-between items-center p-3 bg-gray-800/50 rounded-lg">
+          <div>
+            <p class="font-semibold">2330.TW</p>
+            <p class="text-sm text-gray-400">台積電 · 500 股</p>
+          </div>
+          <div class="text-right">
+            <p class="font-semibold">$290,000</p>
+            <p class="text-sm text-emerald-400">↑ 2.5%</p>
+          </div>
+        </div>
+        <div class="flex justify-between items-center p-3 bg-gray-800/50 rounded-lg">
+          <div>
+            <p class="font-semibold">其他</p>
+            <p class="text-sm text-gray-400">其他股票</p>
+          </div>
+          <div class="text-right">
+            <p class="font-semibold">$60,000</p>
+            <p class="text-sm text-emerald-400">↑ 1.2%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Liabilities Section -->
+    <div class="card rounded-xl p-6 mb-6 animate-fade-in" style="animation-delay: 0.6s">
+      <h3 class="text-xl font-semibold mb-4">🏦 負債</h3>
+      <div class="space-y-3">
+        <div class="flex justify-between items-center p-3 bg-gray-800/50 rounded-lg">
+          <span>房貸餘額</span>
+          <span class="font-semibold text-red-400">$500,000</span>
+        </div>
+        <div class="flex justify-between items-center p-3 bg-gray-800/50 rounded-lg">
+          <span>信用卡負債</span>
+          <span class="font-semibold text-red-400">$0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Income Breakdown -->
+    <div class="card rounded-xl p-6 mb-6 animate-fade-in" style="animation-delay: 0.7s">
+      <h3 class="text-xl font-semibold mb-4">💵 收入明細</h3>
+      <div class="space-y-3">
+        <div class="flex justify-between items-center p-3 bg-gray-800/50 rounded-lg">
+          <span>薪水</span>
+          <span class="font-semibold">$50,000</span>
+        </div>
+        <div class="flex justify-between items-center p-3 bg-gray-800/50 rounded-lg">
+          <span>股票配息</span>
+          <span class="font-semibold">$5,000</span>
+        </div>
+        <div class="flex justify-between items-center p-3 bg-gray-800/50 rounded-lg">
+          <span>房租收入</span>
+          <span class="font-semibold">$15,000</span>
+        </div>
+        <div class="flex justify-between items-center p-3 bg-gray-800/50 rounded-lg">
+          <span>股票市值</span>
+          <span class="font-semibold text-emerald-400">$350,000</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings / Input Form -->
+    <div class="card rounded-xl p-6 mb-6 animate-fade-in" style="animation-delay: 0.8s">
+      <h3 class="text-xl font-semibold mb-4">⚙️ 設定收入</h3>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm text-gray-400 mb-1">薪水</label>
+          <input type="number" id="inputSalary" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white" placeholder="50000">
+        </div>
+        <div>
+          <label class="block text-sm text-gray-400 mb-1">股票配息</label>
+          <input type="number" id="inputDividend" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white" placeholder="5000">
+        </div>
+        <div>
+          <label class="block text-sm text-gray-400 mb-1">房租收入</label>
+          <input type="number" id="inputRent" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white" placeholder="15000">
+        </div>
+        <div>
+          <label class="block text-sm text-gray-400 mb-1">股票市值</label>
+          <input type="number" id="inputStockValue" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white" placeholder="350000">
+        </div>
+        <div>
+          <label class="block text-sm text-gray-400 mb-1">房貸餘額</label>
+          <input type="number" id="inputMortgage" class="w-full bg-gray-800 border border-gray-700 rounded-jsan px-3 py-2 text-white" placeholder="500000">
+        </div>
+        <div>
+          <label class="block text-sm text-gray-400 mb-1">信用卡負債</label>
+          <input type="number" id="inputCreditCard" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white" placeholder="0">
+        </div>
+      </div>
+      <button onclick="alert('這是示範頁面。正式上線後可儲存設定。')" class="mt-4 w-full px-6 py-3 bg-emerald-600 hover:bg-emerald-500 rounded-lg transition font-semibold">
+        儲存 💾
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center text-gray-500 text-sm py-4">
+      <p>這是示範畫面 · 正式版需要部署後端才能使用</p>
+      <p class="mt-2">資料更新時間：<span id="updateTime">—</span></p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('updateTime').textContent = new Date().toLocaleString('zh-TW');
+  </script>
+</body>
+</html>
